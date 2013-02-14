@@ -32,6 +32,7 @@ $file = str_replace('"', '', $arguments['file']);
 $dest = str_replace('"', '', $arguments['dest']);
 $conflict = !empty($arguments['conflict']) ? $arguments['conflict'] : 'skip';
 $mode = !empty($arguments['mode']) ? $arguments['mode'] : 'copy';
+$xbmc = !empty($arguments['xbmc']) ? $arguments['xbmc'] : '';
 
 if (empty($dest))
     die('No destination specified');
@@ -42,6 +43,13 @@ elseif (is_dir($file))
     handleFolder($file, $dest, $mode);
 else
     echo "Invalid file speciifed\n";
+
+// Tell XBMC to scan it's library again
+if (!empty($xbmc))
+{
+    $request = "http://" . $xbmc . "/jsonrpc?request=%7B%22id%22%3A1%2C%22method%22%3A%22VideoLibrary.Scan%22%2C%22params%22%3A%5B%5D%2C%22jsonrpc%22%3A%222.0%22%7D";
+    file_get_contents($request);
+}
 
 /**
  * Recursively handles a folder
