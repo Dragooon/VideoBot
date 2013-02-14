@@ -1,0 +1,14 @@
+This is a basic video bot written in PHP meant to be used via CLI, some usage examples are:
+
+    php bot.php --file="/path/to/source.mp4" --dest="/base/path/to/destination" --mode=delete --conflict=delete
+
+The base destination will have two folders created, TV Shows and Movies and the files will accordingly be sorted in there. TV Shows will be sorted
+into TV Shows/Series name/Season #/Episode title.ext format, Movies will be stored as Movies/Title (year).ext format. 
+
+I created it to automatically sort my torrent downloads into TV Shows and Movies folder respectively, perhaps you can find some similar use for it.
+
+A lot of work is still required in handling of multi-part episodes, better detection of episode's season, episode number and title, 
+perhaps subtitle fetching and some more features.
+
+Inspired from filebot, but since it was written in Java I couldn't use it in Raspberry Pi efficiently. Uses The Movie DB and The TV DB, open source
+databases for storing movies and TV episode's information. Uses open source libraries for their handling
