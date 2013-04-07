@@ -160,7 +160,7 @@ function handleFile($file, $dest, $mode = 'delete', $conflict = 'skip')
         elseif (file_exists($dest))
             return true;
 
-        echo "Moving file to $dest";
+        echo "\nMoving file to $dest";
 
         $time = microtime(true);
         if ($mode == 'delete')
@@ -169,10 +169,10 @@ function handleFile($file, $dest, $mode = 'delete', $conflict = 'skip')
             copy($file, $dest);
 
         $time_taken = microtime(true) - $time;
-        echo 'Moved the file in ' . ($time_taken / 1000) . ' seconds';
+        echo "\nMoved the file in " . $time_taken . ' seconds';
     }
 
-    echo "$file => $dest\n";
+    echo "\n$file => $dest\n";
 }
 
 /**
@@ -226,7 +226,7 @@ function scrapeEpisode($fileparts, $season, $episode)
     // Found a match? yay!
     if (!empty($series))
     {
-        echo 'Detected ' . $series[0]->name;
+        echo "\nDetected " . $series[0]->name;
 
         // Fetch this episode
         try {
