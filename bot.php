@@ -160,10 +160,16 @@ function handleFile($file, $dest, $mode = 'delete', $conflict = 'skip')
         elseif (file_exists($dest))
             return true;
 
+        echo "Moving file to $dest";
+
+        $time = microtime(true);
         if ($mode == 'delete')
             rename($file, $dest);
         else
             copy($file, $dest);
+
+        $time_taken = microtime(true) - $time;
+        echo 'Moved the file in ' . ($time_taken / 1000) . ' seconds';
     }
 
     echo "$file => $dest\n";
@@ -220,6 +226,8 @@ function scrapeEpisode($fileparts, $season, $episode)
     // Found a match? yay!
     if (!empty($series))
     {
+        echo 'Detected ' . $series[0]->name;
+
         // Fetch this episode
         try {
             $episode = $tvdb->getEpisode($series[0]->id, $season, $episode);
